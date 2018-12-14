@@ -30,13 +30,13 @@
 
     机器名修改也很简单，只需在`/etc/hostname`中写入你想要的机器名。
 
-    ![]()
+    ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/hostname.PNG)
 
   - hosts文件
 
     hosts文件是将ip和我们的机器名相对应，这里要写入namenode主节点以及所有从节点datanode，也是在`/etc/hosts`中进行修改。
 
-    ![]()
+    ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/hosts.PNG)
 
   - ssh远程连接
 
@@ -52,7 +52,7 @@
 
   - 其次进行环境变量配置，首先进入`/etc/profile`目录下，然后配置即可。
 
-    ![]()
+    ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/env.PNG)
 
 - ##### 配置Hadoop
 
@@ -60,33 +60,33 @@
 
   - 配置core-site.xml
 
-    ![]()
+    ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/core-site.PNG)
 
   - 配置hdfs-site.xml
 
     > 再这里面的dfs.raplication中的value=2，意思是有两个datanode
 
-    ![]()
+    ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/hdfs-site.PNG)
 
   - 配置mapred-site.xml
 
-    ![]()
+    ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/mapred-site.PNG)
 
   - 配置yarn-site.xml
 
-    ![]()
+    ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/yarn-site.PNG)
 
   - 配置slaves文件
 
     > slave文件中是标明datanode，所以只需列出所有datanode的名字即可
 
-    ![]()
+    ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/slave.PNG)
 
   - 配置hadoop-env.sh
 
     > 可能hadoop自身的缺陷吧，它不太会识别这里的`JAVA_HOME=$JAVA_HOME`所以我们选择改为绝对路径
 
-    ![]()
+    ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/hadoop-env.PNG)
 
   - 格式化namenode
 
@@ -96,16 +96,20 @@
     >
     > 解决方案：手动把我们创建的mydir/data/current/VERSION进行改正即可
 
-    ![]()
+    ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/erro.PNG)
 
 - ##### 启动hdfs和yarn
 
   经过了一系列挣扎，如果按照上述方式配置后，在这里我们就可以启动了。在`Hadoop-2.7.6`目录下使用指令`sbin/start-dfs.sh`和`sbin/start-yarn.sh`即可。
 
-  > 启动成功后使用`jps`指令分别可以看到以下结果（hafs、yarn、datanode）
+  > 启动成功后使用`jps`指令分别可以看到以下结果（hdfs、yarn、datanode）
 
-  ![]()
+  ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/start1.PNG)
 
-  ![]()
+  ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/start2.PNG)
 
-  ![]()
+  ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/datanode_start.PNG)
+- ##### 愉快的wordCount
+
+  第一个例子不是Helloworld了，而是wordCount。如图：
+  ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/run.PNG)
