@@ -70,7 +70,7 @@
 
   - 配置mapred-site.xml
 
-    ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/mapred-site.PNG)
+    ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/mapre-site.PNG)
 
   - 配置yarn-site.xml
 
