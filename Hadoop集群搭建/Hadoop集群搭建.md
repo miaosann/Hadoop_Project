@@ -109,7 +109,13 @@
   ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/start2.PNG)
 
   ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/datanode_start.PNG)
+  
+- ##### 成功的号角
+
+  Web端也可以看到成功的画面，这里就不截图了，自行脑补，嘿嘿🤭
+  
 - ##### 愉快的wordCount
 
   第一个例子不是Helloworld了，而是wordCount。如图：
+  
   ![](https://github.com/miaosann/Hadoop_Project/blob/master/Hadoop集群搭建/img/run.PNG)
