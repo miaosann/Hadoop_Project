@@ -35,7 +35,11 @@
     由于Hbase连接极其缓慢，所以这里使用监听器，在Tomcat启动时进行连接创立，有效加快了速度，提高了用户体验。
 
 - ##### 成功运行
-
+  
+  开始搜索
+  
+  ![](https://github.com/miaosann/Hadoop_Project/blob/master/Search_Engine/img/3.png)
+  
   搜索结果（title优先级高于关键字次数）
   
   ![](https://github.com/miaosann/Hadoop_Project/blob/master/Search_Engine/img/2.png)
