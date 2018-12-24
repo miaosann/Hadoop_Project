@@ -10,7 +10,7 @@
 
   然后将其导入HDFS存储，使用MapReduce进行处理，最终得到倒排索引的形式。
 
-  ![]()
+  ![](https://github.com/miaosann/Hadoop_Project/blob/master/Search_Engine/img/4.png)
 
 - ##### Hbase存储
 
@@ -36,8 +36,14 @@
 
 - ##### 成功运行
 
-  <video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
-        <source id="mp4" src="" type="video/mp4">
+  搜索结果（title优先级高于关键字次数）
+  
+  ![](https://github.com/miaosann/Hadoop_Project/blob/master/Search_Engine/img/2.png)
+  
+  演示视频
+  
+  <video id="video" controls="" preload="none" poster="https://github.com/miaosann/Hadoop_Project/blob/master/Search_Engine/img/3.png">
+        <source id="mp4" src="https://github.com/miaosann/Hadoop_Project/blob/master/Search_Engine/img/example.mp4" type="video/mp4">
         <p>Your user agent does not support the HTML5 Video element.</p>
       </video>
 
