@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="stream">
+    <output-path>$PROJECT_DIR$/out/artifacts/stream</output-path>
+    <root id="archive" name="stream.jar">
+      <element id="module-output" name="TestScala" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/TestScala/src/stream/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
