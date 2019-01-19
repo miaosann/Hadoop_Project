@@ -1,6 +1,9 @@
 package utils;
 
+import c6.DelaysWritable;
+import c6.MonthDoWWritable;
 import org.apache.commons.lang.StringUtils;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 
 public class AirlineDataUtils {
@@ -15,7 +18,7 @@ public class AirlineDataUtils {
         return contents[0];
     }
 
-    public static String getMonth(String[] contents) {
+    public static String  getMonth(String[] contents) {
         return StringUtils.leftPad(contents[1], 2, "0");
     }
 
@@ -234,6 +237,91 @@ public class AirlineDataUtils {
         return carrierDetails;
     }
 
+    public static DelaysWritable parseDelaysWritable(String line) {
+
+        String[] contents = line.split(",");
+        DelaysWritable dw = new DelaysWritable();
+
+        dw.year = new IntWritable(Integer.parseInt(AirlineDataUtils
+                .getYear(contents)));
+        dw.month = new IntWritable(Integer.parseInt(AirlineDataUtils
+                .getMonth(contents)));
+        dw.date = new IntWritable(Integer.parseInt(AirlineDataUtils
+                .getDateOfMonth(contents)));
+        dw.dayOfWeek = new IntWritable(Integer.parseInt(AirlineDataUtils
+                .getDayOfTheWeek(contents)));
+        dw.arrDelay = new IntWritable(AirlineDataUtils.parseMinutes(
+                AirlineDataUtils.getArrivalDelay(contents), 0));
+        dw.depDelay = new IntWritable(AirlineDataUtils.parseMinutes(
+                AirlineDataUtils.getDepartureDelay(contents), 0));
+        dw.destAirportCode = new Text(AirlineDataUtils.getDestination(contents));
+        dw.originAirportCode = new Text(AirlineDataUtils.getOrigin(contents));
+        dw.carrierCode = new Text(AirlineDataUtils.getUniqueCarrier(contents));
+        return dw;
+
+    }
+
+    public static Text parseDelaysWritableToText(DelaysWritable dw) {
+        StringBuilder out = new StringBuilder("");
+        out.append(dw.month).append(",");
+        out.append(dw.dayOfWeek).append(",");
+        out.append(dw.year).append(",");
+        out.append(dw.date).append(",");
+        out.append(dw.arrDelay).append(",");
+        out.append(dw.arrDelay).append(",");
+        out.append(dw.depDelay).append(",");
+        out.append(dw.originAirportCode).append(",");
+        out.append(dw.destAirportCode).append(",");
+        out.append(dw.carrierCode);
+        return new Text(out.toString());
+    }
+
+    public static Text parseDelaysWritableToText(DelaysWritable dw,
+                                                 String originAirport,
+                                                 String destAirport,
+                                                 String carrier) {
+        StringBuilder out = new StringBuilder("");
+        out.append(dw.month).append(",");
+        out.append(dw.dayOfWeek).append(",");
+        out.append(dw.year).append(",");
+        out.append(dw.date).append(",");
+        out.append(dw.arrDelay).append(",");
+        out.append(dw.arrDelay).append(",");
+        out.append(dw.depDelay).append(",");
+        out.append(dw.originAirportCode).append(",");
+        out.append(originAirport).append(",");
+        out.append(dw.destAirportCode).append(",");
+        out.append(destAirport).append(",");
+        out.append(dw.carrierCode).append(",");
+        out.append(carrier);
+        return new Text(out.toString());
+    }
+
+    public static int getCustomPartition(MonthDoWWritable key, int indexRange, int noOfReducers) {
+        int indicesPerReducer = (int) Math.floor( indexRange/ noOfReducers);
+        int index = (key.month.get()-1) * 7 + (7-key.dayOfWeek.get());
+        /*
+         *If the noOfPartitions is greater than the range just return the index
+         *All Partitions above the (range-1) will receive no records.
+         */
+        if (indexRange < noOfReducers) {
+            return index;
+        }
+        for (int i = 0; i < noOfReducers; i++) {
+            int minValForPartitionInclusive = (i) * indicesPerReducer;
+            int maxValForParitionExclusive = (i + 1) * indicesPerReducer;
+
+            if (index >= minValForPartitionInclusive
+                    && index < maxValForParitionExclusive) {
+                return i;
+            }
+        }
+        /*
+         * If the indexRange!=indicesPerReducer*noOfReducers the last partition
+         * gets the remainder of records.
+         */
+        return (noOfReducers - 1);
+    }
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
