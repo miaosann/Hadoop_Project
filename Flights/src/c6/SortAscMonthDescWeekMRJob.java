@@ -96,6 +96,8 @@ public class SortAscMonthDescWeekMRJob {
         job.setOutputKeyClass(NullWritable.class);
         job.setOutputValueClass(Text.class);
 
+        job.setPartitionerClass(MonthDoWPartitioner.class);
+
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
